@@ -1,0 +1,74 @@
+\usepackage{color}
+\usepackage{udline}
+\usepackage{ifthen}
+
+%%------------------------------------------------------------
+\def\MyBox#1{{\unitlength=#1 \framebox(1,1){}}}
+\def\MyFillBox#1{\rule{#1}{#1}}
+\marginparsep = 1pt
+
+%%------------------------------------------------------------
+\def\TkyMemo#1#2{%
+\definecolor{EditColor}{rgb}{.90, 0, 0}%
+{\color{EditColor}\MyFillBox{.5ex}%
+%\footnote{\color{EditColor}#2}
+\ifthenelse{\equal{#2}{}}{}{%
+\marginpar{\tiny\color{EditColor}\raisebox{1ex}{\MyFillBox{.5ex}}#2}%
+}%
+#1%
+}}
+
+%%------------------------------------------------------------
+\def\itkMemo#1#2{%
+\definecolor{EditColor}{rgb}{.90, 0, .00}%
+\definecolor{EditColor2}{rgb}{.00, 0, .90}%
+{\color{EditColor}\MyFillBox{.5ex}%
+#1%
+\ifthenelse{\equal{#2}{}}{}{{\tiny\color{EditColor2}[#2]}}%
+}}
+
+%%------------------------------------------------------------
+\def\TkyMemoOld#1#2{%
+\definecolor{EditColor}{rgb}{.40, 0, .80}%
+{\color{EditColor}\MyFillBox{.5ex}%
+%\footnote{\color{EditColor}#2}
+\marginpar{\tiny\color{EditColor}\raisebox{1ex}{\MyFillBox{.5ex}}#2}%
+#1%
+}}
+
+%%------------------------------------------------------------
+\def\itkMemoOld#1#2{%
+\definecolor{EditColor}{rgb}{.40, 0, .80}%
+\definecolor{EditColor2}{rgb}{.20, .20, .80}%
+{\color{EditColor}\MyFillBox{.5ex}%
+#1%
+{\tiny\color{EditColor2}[#2]}%
+}}
+
+%%------------------------------------------------------------
+\def\TkyEdit#1#2#3{% \TkyEdit{new}{old}{memo}
+\definecolor{EditNewColor}{rgb}{.90, 0, 0}%
+\definecolor{EditOldColor}{rgb}{.60, .70, .70}%
+\definecolor{EditMemoColor}{rgb}{.90, .50, .00}%
+{\color{EditNewColor}\MyFillBox{.5ex}%
+%\footnote{\color{EditColor}#2}
+\ifthenelse{\equal{#3}{}}{}{%
+\marginpar{\tiny\color{EditNewColor}\raisebox{1ex}{\MyFillBox{.5ex}}#3}%
+}%
+#1%
+}{\color{EditOldColor}%
+\Sl{#2}%
+}}
+
+%%------------------------------------------------------------
+\def\itkEdit#1#2#3{% \TkyEdit{new}{old}{memo}
+\definecolor{EditNewColor}{rgb}{.90, 0, 0}%
+\definecolor{EditOldColor}{rgb}{.60, .70, .70}%
+\definecolor{EditMemoColor}{rgb}{.90, .50, .00}%
+{\color{EditNewColor}\MyFillBox{.5ex}%
+#1%
+}{\color{EditOldColor}%
+\Sl{#2}%
+}%
+\ifthenelse{\equal{#3}{}}{}{{\tiny\color{EditMemoColor}[(memo)#3]}}%
+}

@@ -1,0 +1,152 @@
+%  \title{タイトル}
+%  \idnumber{学籍番号}
+%  \author{著者}
+%  \teacher{指導教員}
+
+%% Title
+\newlength{\@titlespace}						% タイトルの大きさを保持
+\setlength{\@titlespace}{25mm}					% デフォルト 40mm
+\def\titlespace#1{\setlength{\@titlespace}{#1}}	% デフォルトの変更
+\def\@dateposition{\center}
+\def\dateposition#1{\renewcommand{\@dateposition}{#1}}
+\def\author#1{\def\@author{#1}}
+\def\idnumber#1{\def\@idnumber{#1}}
+\def\teacher#1{\def\@teacher{#1}}
+
+\def\@maketitle{
+  \vbox to\@titlespace{\vfill
+   \begin{center}  
+    {\bf\LARGE \@title \par}\par \vskip 2em 
+    \begin{tabular}{rl}
+    {\Large \@idnumber \quad \@author \qquad 指導教員：}&{\Large \@teacher }\cr
+    \end{tabular}
+    \end{center}
+   \vfill}  
+  \vskip 1.5em  
+}
+
+
+%% Section
+\def\thesection {\arabic{section}}
+\def\thesubsection {\ \arabic{section}.\arabic{subsection}}
+\def\thesubsubsection {\ {\thesubsection}.\arabic{subsubsection}}
+\def\theparagraph {\ {\thesubsubsection}.\arabic{paragraph}}
+\def\thesubparagraph {\ {\theparagraph}.\arabic{subparagraph}}
+
+\def\section{\@startsection {section}{1}{\z@}
+{1.0ex}{0.5ex}{\normalsize\bf}}
+\def\subsection{\@startsection{subsection}{2}{\z@}
+{1.0ex}{0.5ex}{\normalsize\bf}}
+\def\subsubsection{\@startsection{subsubsection}{3}{\z@}
+{1.0ex}{0.5ex}{\normalsize\bf}}
+\def\paragraph{\@startsection {paragraph}{4}{\z@}
+{1.0ex}{1em}{\normalsize\bf}}
+\def\subparagraph{\@startsection {subparagraph}{4}{\parindent}
+{1.0ex}{1em}{\normalsize\bf}}
+
+
+\renewcommand{\thepage}{}
+
+%% Two column config
+\twocolumn
+\sloppy
+\flushbottom
+\parindent 1em
+\parskip 0pt
+\leftmargini 2em
+\leftmarginv .5em
+\leftmarginvi .5em
+
+\columnsep 6mm
+
+\hoffset -1in
+\oddsidemargin 20mm % default 30mm
+\evensidemargin 20mm
+\marginparwidth 0cm 
+\marginparsep 1pt 
+
+\voffset -1in
+\topmargin 20mm % default 25mm
+\headheight 0pt
+\headsep 0pt
+
+\textwidth 17cm % default 16cm
+\linewidth 17.5cm
+\textheight 257mm % default 247mm
+
+%\leftmargin 0cm
+%\rightmargin 1.5cm
+%\topmargin -1.5cm
+
+\hbadness=1000
+\tolerance=5000 %(Must be less than 10000=sloppy in Japanese)
+
+%\twocolumn
+%\sloppy
+%\flushbottom
+%\parindent 1em
+%\leftmargini 2em
+%\leftmarginv .5em
+%\leftmarginvi .5em
+%\oddsidemargin 0pt 
+%\evensidemargin 0pt
+%\marginparwidth 10cm 
+%% \marginparsep 10pt 
+%\marginparsep 1pt 
+%\textwidth 17.5cm
+%\linewidth 17.5cm
+%\textheight 789pt
+%\leftmargin 1cm
+%\rightmargin 3cm
+%\topmargin -3cm
+%\headheight 0pt
+%\hbadness=1000
+%\tolerance=5000 %(Must be less than 10000=sloppy in Japanese)
+
+%% Other
+\renewcommand\abstract{\section*{概要}}%
+\def\nopagenumbers{\renewcommand{\thepage}{}}
+
+\def\labelitemii{$\cdot$}	%itemの二番目を・に
+
+\def\@listI{			%一番外側のリストのパラメータの初期値
+ \leftmargin \leftmargini 
+ \parsep \z@			%項目中の段落の空き
+ \topsep 6pt plus 2pt minus 2pt %リスト上下の空き
+ \itemsep 0pt plus 1pt\relax}	%項目間の空き
+\let\@listi\@listI
+\@listi 
+
+\def\@listii{			%その内側のリストのパラメータ
+ \leftmargin \leftmarginii
+ \labelwidth \leftmarginii
+ \advance \labelwidth -\labelsep
+ \topsep 2pt plus 1pt minus 1pt
+ \parsep \z@ 
+ \itemsep 0pt plus 1pt\relax}
+
+\def\@listiii{			%その内側のリストのパラメータ
+ \leftmargin \leftmarginiii
+ \labelwidth \leftmarginiii
+ \advance \labelwidth -\labelsep
+ \topsep 2pt plus 1pt minus 1pt 
+ \parsep \z@ 
+ \partopsep 1pt minus 1pt
+ \itemsep 1pt plus 1pt\relax}
+
+\def\@listiv{			%その内側のリストのパラメータ
+ \leftmargin\leftmarginiv
+ \labelwidth\leftmarginiv
+ \advance\labelwidth-\labelsep}
+
+\def\@listv{			%その内側のリストのパラメータ
+ \leftmargin\leftmarginv
+ \labelwidth\leftmarginv
+ \advance\labelwidth-\labelsep}
+
+\def\@listvi{			%最も内側のリストのパラメータ
+ \leftmargin\leftmarginvi
+ \labelwidth\leftmarginvi
+ \advance\labelwidth-\labelsep}
+
+\pagestyle{empty}

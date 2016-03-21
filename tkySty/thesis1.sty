@@ -1,0 +1,191 @@
+%--------------------------------------------------------------
+% Include style files
+%--------------------------------------------------------------
+
+%\usepackage{multicol}
+%\usepackage{epsf}
+%\usepackage[dvipdfmx]{graphicx}
+%\usepackage{boxedminipage}
+%\usepackage{epsfig}
+%\usepackage{amsmath}
+%\usepackage{amssymb}
+%\usepackage{ascmac}
+%\usepackage{enumerate}
+%\usepackage{url}
+%\usepackage{nidanfloat}
+%\usepackage{here}
+
+%----------------------------------------------------------------
+% ページのレイアウト
+%----------------------------------------------------------------
+\topmargin=-0.3cm
+\headheight=0cm
+\headsep=0cm
+\oddsidemargin=-0.5cm  \evensidemargin=-0.5cm
+\textheight=25cm  \textwidth=17.0cm
+\footskip=2.0cm
+\columnsep=1.0cm
+
+%----------------------------------------------------------------
+% タイトル
+%----------------------------------------------------------------
+
+\makeatletter
+\newdimen\vspace@title
+%
+\def\thesistype#1{\gdef\@thesistype{#1}}
+\def\etitle#1{\gdef\@etitle{#1}}
+\def\eauthor#1{\gdef\@eauthor{#1}}
+\def\teacher#1{\gdef\@teacher{#1}}
+%
+\vspace@title=0.14\textheight % space for title
+%
+\long\def\abstract#1{\def\@abstract{#1}}
+\def\@abstract{}
+\let\@oldmaketitle\@maketitle
+%
+\def\bigtitle{\par
+ \begingroup
+ \def\thefootnote{\fnsymbol{footnote}}%
+ \def\@makefnmark{\hbox
+ to\z@{$\m@th^{\@thefnmark}$\hss}}%
+ \if@twocolumn
+ \twocolumn[\@bigtitle]%
+ \else \newpage
+ \global\@topnum\z@
+ \@bigtitle \fi\thispagestyle{plain}\@thanks
+ \endgroup
+ \setcounter{footnote}{0}%
+ \let\bigtitle\relax
+ \let\@bigtitle\relax
+}
+%
+\def\@bigtitle{\newpage\null
+ \vbox to \vspace@title
+ {
+ \vspace{2cm}
+ \begin{center} 
+ {\large \@thesistype} \\
+ \vspace{2cm}
+ {\LARGE \@title} \\
+ \vspace{1cm}
+ {\large \@author} \\
+ \vspace{3cm}
+ {\Large \@etitle} \\
+ \vspace{1cm}
+ {\large \@eauthor} \\
+ \vspace{4cm}
+ {\large 提出年月日 \@date} \\
+ \vspace{3cm}
+ {\large \@teacher} \\
+ \end{center}}
+}
+
+\def\maketitle{\par
+ \begingroup
+ \def\thefootnote{\fnsymbol{footnote}}%
+ \def\@makefnmark{\hbox
+ to\z@{$\m@th^{\@thefnmark}$\hss}}%
+ \if@twocolumn
+ \twocolumn[\@maketitle]%
+ \else \newpage
+ \global\@topnum\z@
+ \@maketitle \fi\thispagestyle{plain}\@thanks
+ \endgroup
+ \setcounter{footnote}{0}%
+ \let\maketitle\relax
+ \let\@maketitle\relax
+}
+\def\@maketitle{
+ \vbox to \vspace@title
+ {\begin{center}
+ {\LARGE \@title} \\
+ \vspace{1cm}
+ {\Large \@author} \\
+ \vspace{1cm}
+ {\LARGE \@etitle} \\
+ \vspace{1cm}
+ {\Large \@eauthor} \\
+ \end{center}
+ }
+ \vskip 4cm
+ \vbox{
+ \leftline{\bfseries\abstractname}%
+ \begin{quotation}\@abstract\end{quotation}%
+ \vskip 1cm
+ }
+}
+%
+
+%----------------------------------------------------------------
+% sectionなどの再定義
+%----------------------------------------------------------------
+
+%sectionの再定義%
+
+%\makeatletter
+
+%\renewcommand{\section}{%
+%	\@startsection{section}{1}{\z@}%
+%	{.5\Cvs \@plus.2\Cdp \@minus.2 \Cdp}%
+%	{.2\Cvs \@plus.2\Cdp}%
+%	{\reset@font\large\bfseries}}
+
+%subsectionの再定義%
+
+%\renewcommand{\subsection}{%
+%	\@startsection{subsection}{1}{\z@}%
+%	{.8\Cvs \@plus.5\Cdp \@minus.2 \Cdp}%
+%	{.4\Cvs \@plus.3\Cdp}%
+%	{\reset@font\bfseries}}
+
+%\renewcommand{\subsubsection}{%
+%	\@startsection{subsubsection}{1}{\z@}%
+%	{.6\Cvs \@plus.5\Cdp \@minus.2 \Cdp}%
+%	{.2\Cvs \@plus.3\Cdp}%
+%	{\reset@font\bfseries}}
+
+
+%\renewcommand{\paragraph}{%
+%	\@startsection{paragraph}{4}{\parindent}%
+%	{.4\Cvs \@plus.5\Cdp \@minus.2 \Cdp}%
+%	{-.8\Cvs \@plus.5\Cdp}%
+%	{\reset@font\bfseries}}
+
+%\makeatother
+
+
+
+%--------------------------------------------------------------
+%アイテムの行間調整(enumerate, itemize, description環境)
+%--------------------------------------------------------------
+\makeatletter
+
+\def\enumerate{\ifnum \@enumdepth >3 \@toodeep\else
+\advance\@enumdepth \@ne
+\edef\@enumctr{enum\romannumeral\the\@enumdepth}\list
+{\csname label\@enumctr\endcsname}{\usecounter
+{\@enumctr}\def\makelabel##1{\hss\llap{##1}}%
+\parsep\z@ \itemsep\z@ \topsep\z@}\fi}
+%
+\def\itemize{\ifnum \@itemdepth >3 \@toodeep\else \advance\@itemdepth \@ne
+\edef\@itemitem{labelitem\romannumeral\the\@itemdepth}%
+\list{\csname\@itemitem\endcsname}{\def\makelabel##1{\hss\llap{##1}}%
+\parsep\z@ \itemsep\z@ \topsep\z@}\fi}
+%
+\def\description{\list{}{\labelwidth\z@ \itemindent-\leftmargin
+\let\makelabel\descriptionlabel \parsep\z@ \itemsep\z@ \topsep\z@}}
+%
+
+\makeatother%%
+
+%--------------------------------------------------------------
+%footnote環境：行頭揃え
+%--------------------------------------------------------------
+\makeatletter
+\long\def\@makefntext#1{\parindent 1em\noindent
+  \hbox to 2em{\hss$^{\@thefnmark}$~}%
+  \@tempdima\columnwidth\advance\@tempdima-2em
+  \parbox[t]{\@tempdima}{#1}}
+\makeatother
+

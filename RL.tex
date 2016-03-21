@@ -1,0 +1,43 @@
+\documentclass[11pt,a4paper]{jsarticle}
+%
+\usepackage{amsmath,amssymb}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{ascmac}
+%
+\setlength{\textwidth}{\fullwidth}
+\setlength{\textheight}{40\baselineskip}
+\addtolength{\textheight}{\topskip}
+\setlength{\voffset}{-0.2in}
+\setlength{\topmargin}{0pt}
+\setlength{\headheight}{0pt}
+\setlength{\headsep}{0pt}
+%
+\newcommand{\divergence}{\mathrm{div}\,}  %ダイバージェンス
+\newcommand{\grad}{\mathrm{grad}\,}  %グラディエント
+\newcommand{\rot}{\mathrm{rot}\,}  %ローテーション
+%
+\title{...}
+\author{...}
+\date{\today}
+\begin{document}
+\maketitle
+%
+%
+\section{平均報酬を求めるとき0320}
+\begin{eqnarray}
+    Q_{k+1} =  Q_k + \frac{1}{k+1}(r_{k+1}-Q_k) 
+    % \Delta\epsilon_i &\leftarrow& T(\mu_G - r_i (\epsilon_i)) (r_{ib} - r_{ia}) \\
+    % \sigma^2_G = \frac{1}{N}\sum_{}^{N}(\mu_G - r_i (\epsilon_i))^2
+    Q_{k+1} &=& \frac{1}{k+1}\sum_{i=1}^{k+1}r_i \\
+            &=&  \frac{1}{k+1}(r_{k+1}+\sum_{i=1}^{k}r_i) \\
+            &=&  \frac{1}{k+1}(r_{k+1}+kQ_k) \\
+            &=&  \frac{1}{k+1}(r_{k+1}+kQ_k+Q_k - Q_k) \\
+            &=&  \frac{1}{k+1}(r_{k+1}+(k+1)Q_k-Q_k) \\
+            &=&  Q_k + \frac{1}{k+1}(r_{k+1}-Q_k) 
+\end{eqnarray}
+
+%
+%
+\end{document}
+
